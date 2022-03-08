@@ -52218,6 +52218,11 @@ const fs = __nccwpck_require__(5747);
 const path = __nccwpck_require__(5622);
 
 const key = core.getInput('key', { required: true})
+const restoreKeys = core
+  .getInput('restore-keys')
+  .split("\n")
+  .map(s => s.trim())
+  .filter(x => x !== "")
 
 async function myexec(script, args) {
   var srcDir = path.dirname(__filename)
@@ -52238,7 +52243,6 @@ const paths = [
 async function restoreCache() {
   // TODO: Parse restorekeys from input.
   printInfo('Restoring cache for key: ' + key)
-  const restoreKeys = []
   const cacheKey = cache.restoreCache(paths, key, restoreKeys)
   if (cacheKey === undefined) {
     printInfo('No cache found for given key')
