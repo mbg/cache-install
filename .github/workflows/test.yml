@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - mbg/improvements
   pull_request:
   schedule:
     - cron: '00 04 * * 6'
